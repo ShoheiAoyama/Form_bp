@@ -1,9 +1,8 @@
 <?php
-require("phplib/security.php");
-//function h($str)
-//{
-//    return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
-//}
+function h($str)
+{
+    return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
+}
 
 $pageFlag = 0;
 if (!empty($_POST['btn_confirm'])){
@@ -14,46 +13,23 @@ if (!empty($_POST['btn_submit'])){
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <meta charset="UTF-8">
 <head>
     <title>入力フォーム</title>
 </head>
 <body>
 <h2>入力フォーム</h2>
-
-<?php if ($pageFlag === 1) : ?>
-<form method="post" action="index.php">
-    姓
-    <?php echo $_POST['name_sei']; ?>
-    </br>
-    名
-    <?php echo $_POST['name_mei']; ?>
-    </br>
-    性別
-    <?php echo $_POST['sex']; ?>
-    </br>
-    <input type="button" name="back" value="入力画面へ">
-    <input type="button" name="btn_submit" value="確認画面へ">
-    <input type="hidden" name="name_sei" value="<?php echo $_POST['name_sei'];?>">
-    <input type="hidden" name="name_mei" value="<?php echo $_POST['name_mei'];?>">
-    <input type="hidden" name="sex" value="<?php echo $_POST['sex'];?>">
-</form>
-<?php endif; ?>
-
-<?php if ($pageFlag === 2) : ?>
-    登録完了しました。
-<?php endif; ?>
-
+<!--入力画面-->
 <?php if ($pageFlag === 0) : ?>
 <form method="post" action="index.php">
     姓
-    <input type= "text" name="name_sei" value="<?php if (!empty($_POST['name_mei'])){$_POST['name_mei'];} ?>"></br>
+    <input type="text" name="name_sei" value="<?php if (!empty($_POST['name_mei'])){$_POST['name_mei'];} ?>"></br>
     名
-    <input type= "text" name="name_mei"></br>
+    <input type="text" name="name_mei"></br>
     性別
-    <input type= "radio" name="sex[]" value="男">男
-    <input type= "radio" name="sex[]" value="女">女</br>
+    <input type="radio" name="sex[]" value="男">男
+    <input type="radio" name="sex[]" value="女">女</br>
     誕生日
     <select name="year">
         <option value="">-</option>
@@ -179,15 +155,6 @@ if (!empty($_POST['btn_submit'])){
         <option value="2019">2019</option>
         <option value="2020">2020</option>
         <option value="2021">2021</option>
-        <option value="2022">2022</option>
-        <option value="2023">2023</option>
-        <option value="2024">2024</option>
-        <option value="2025">2025</option>
-        <option value="2026">2026</option>
-        <option value="2027">2027</option>
-        <option value="2028">2028</option>
-        <option value="2029">2029</option>
-        <option value="2030">2030</option>
     </select>　年
     <select name="month">
         <option value="">-</option>
@@ -239,12 +206,12 @@ if (!empty($_POST['btn_submit'])){
         <option value="31">31</option>
     </select>　日
     運転免許証
-    <input type= "checkbox" name="license[]" value="有">有
-    <input type= "checkbox" name="license[]" value="無">無</br>
+    <input type="checkbox" name="license[]" value="有">有
+    <input type="checkbox" name="license[]" value="無">無</br>
     電話番号
-    <input type= "text" name="number"></br>
+    <input type="text" name="number"></br>
     メールアドレス
-    <input type= "text" name="email"></br>
+    <input type="text" name="email"></br>
     住所(都道府県)
     <select name="pref">
         <option value="">-</option>
@@ -298,12 +265,83 @@ if (!empty($_POST['btn_submit'])){
     </select>
     住所(都道府県以下)
     <input type= "text" name="address"></br>
-    メッセージ
+    メッセージ</br>
     <textarea name="msg" cols=40 rows=4>
     </textarea>
     </br>
-    <input type="button" name="btn_confirm" value="確認画面へ">
+    <input type="submit" name="btn_confirm" value="確認画面へ">
 </form>
+<?php endif; ?>
+
+<!--確認画面-->
+<?php if ($pageFlag === 1) : ?>
+
+<?php //var_dump($_POST['sex']); ?>
+<!--    </br>-->
+<?php //var_dump($_POST['name_mei']); ?>
+<!--    </br>-->
+<!--    --><?php //var_dump($_POST['name_sei']); ?>
+
+    <?php
+    foreach($_POST['sex'] as $key => $value) {
+        $_POST['sex'] = $value;
+    }
+    ?>
+    <?php
+    foreach($_POST['license'] as $key => $value) {
+        $_POST['license'] = $value;
+    }
+    ?>
+    <form method="post" action="index.php">
+        姓
+        <?php echo $_POST['name_sei']; ?>
+        </br>
+        名
+        <?php echo $_POST['name_mei']; ?>
+        </br>
+        性別
+        <?php echo $_POST['sex']; ?>
+        </br>
+        誕生日
+        <?php echo $_POST['year']; ?>年
+        <?php echo $_POST['month']; ?>月
+        <?php echo $_POST['day']; ?>日
+        </br>
+        運転免許証
+        <?php echo $_POST['license']; ?>
+        </br>
+        電話番号
+        <?php echo $_POST['number']; ?>
+        </br>
+        メールアドレス
+        <?php echo $_POST['email']; ?>
+        </br>
+        住所
+        <?php echo $_POST['pref']; ?>
+        <?php echo $_POST['address']; ?>
+        </br>
+        メッセージ
+        <?php echo $_POST['msg']; ?>
+        </br>
+        <input type="submit" name="back" value="入力画面へ">
+        <input type="submit" name="btn_submit" value="確認画面へ">
+        <input type="hidden" name="name_sei" value="<?php echo $_POST['name_sei'];?>">
+        <input type="hidden" name="name_mei" value="<?php echo $_POST['name_mei'];?>">
+        <input type="hidden" name="sex" value="<?php echo $_POST['sex'];?>">
+        <input type="hidden" name="year" value="<?php echo $_POST['year'];?>">
+        <input type="hidden" name="month" value="<?php echo $_POST['month'];?>">
+        <input type="hidden" name="day" value="<?php echo $_POST['day'];?>">
+        <input type="hidden" name="license" value="<?php echo $_POST['license'];?>">
+        <input type="hidden" name="number" value="<?php echo $_POST['number'];?>">
+        <input type="hidden" name="email" value="<?php echo $_POST['email'];?>">
+        <input type="hidden" name="pref" value="<?php echo $_POST['pref'];?>">
+        <input type="hidden" name="address" value="<?php echo $_POST['address'];?>">
+        <input type="hidden" name="msg" value="<?php echo $_POST['msg'];?>">
+    </form>
+<?php endif; ?>
+<!--登録画面-->
+<?php if ($pageFlag === 2) : ?>
+    登録しました。
 <?php endif; ?>
 
 </body>
