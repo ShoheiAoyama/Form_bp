@@ -1,18 +1,59 @@
+<?php
+require("phplib/security.php");
+//function h($str)
+//{
+//    return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
+//}
+
+$pageFlag = 0;
+if (!empty($_POST['btn_confirm'])){
+    $pageFlag = 1;
+}
+if (!empty($_POST['btn_submit'])){
+    $pageFlag = 2;
+}
+?>
 <!DOCTYPE html>
 <html>
+<meta charset="UTF-8">
 <head>
-    <meta charset="UTF-8">
     <title>入力フォーム</title>
-        </head>
+</head>
 <body>
-<h1>入力フォーム</h1>
-<form method="post" action="">
+<h2>入力フォーム</h2>
+
+<?php if ($pageFlag === 1) : ?>
+<form method="post" action="index.php">
     姓
-    <input type= "text" name="name_sei" style="width: 200px;"></br>
+    <?php echo $_POST['name_sei']; ?>
+    </br>
     名
-    <input type= "text" name="name_mei" style="width: 200px;"></br>
+    <?php echo $_POST['name_mei']; ?>
+    </br>
     性別
-    <input type= "radio" name="sex" style="width: 200px;"></br>
+    <?php echo $_POST['sex']; ?>
+    </br>
+    <input type="button" name="back" value="入力画面へ">
+    <input type="button" name="btn_submit" value="確認画面へ">
+    <input type="hidden" name="name_sei" value="<?php echo $_POST['name_sei'];?>">
+    <input type="hidden" name="name_mei" value="<?php echo $_POST['name_mei'];?>">
+    <input type="hidden" name="sex" value="<?php echo $_POST['sex'];?>">
+</form>
+<?php endif; ?>
+
+<?php if ($pageFlag === 2) : ?>
+    登録完了しました。
+<?php endif; ?>
+
+<?php if ($pageFlag === 0) : ?>
+<form method="post" action="index.php">
+    姓
+    <input type= "text" name="name_sei" value="<?php if (!empty($_POST['name_mei'])){$_POST['name_mei'];} ?>"></br>
+    名
+    <input type= "text" name="name_mei"></br>
+    性別
+    <input type= "radio" name="sex[]" value="男">男
+    <input type= "radio" name="sex[]" value="女">女</br>
     誕生日
     <select name="year">
         <option value="">-</option>
@@ -198,11 +239,12 @@
         <option value="31">31</option>
     </select>　日
     運転免許証
-    <input type= "checkbox" name="sex" style="width: 200px;"></br>
+    <input type= "checkbox" name="license[]" value="有">有
+    <input type= "checkbox" name="license[]" value="無">無</br>
     電話番号
-    <input type= "text" name="name_mei" style="width: 200px;"></br>
+    <input type= "text" name="number"></br>
     メールアドレス
-    <input type= "text" name="name_mei" style="width: 200px;"></br>
+    <input type= "text" name="email"></br>
     住所(都道府県)
     <select name="pref">
         <option value="">-</option>
@@ -255,14 +297,14 @@
         <option value="47">沖縄県</option>
     </select>
     住所(都道府県以下)
-    <input type= "text" name="address" style="width: 200px;"></br>
+    <input type= "text" name="address"></br>
     メッセージ
     <textarea name="msg" cols=40 rows=4>
-
     </textarea>
     </br>
-    <input type="button" onclick="history.back()" value="戻る">
-    <input type="submit" value="OK">
+    <input type="button" name="btn_confirm" value="確認画面へ">
 </form>
+<?php endif; ?>
+
 </body>
 </html>
