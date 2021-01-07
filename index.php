@@ -258,8 +258,8 @@
     <input type= "text" name="address" style="width: 200px;"></br>
     メッセージ
     <textarea name="msg" cols=40 rows=4>
-あいうえお
-  </textarea>
+
+    </textarea>
     </br>
     <input type="button" onclick="history.back()" value="戻る">
     <input type="submit" value="OK">
