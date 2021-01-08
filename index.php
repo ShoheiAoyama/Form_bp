@@ -1,347 +1,917 @@
 <?php
+
+//CSRF
+session_start();
+
+//クロスサイトスクリプティング（XSS）対策
 function h($str)
 {
     return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
 }
 
-$pageFlag = 0;
-if (!empty($_POST['btn_confirm'])){
-    $pageFlag = 1;
+//画面変更
+$pageFlag = 0;//入力画面
+if (!empty($_POST['btn_confirm'])) {
+    $pageFlag = 1;//確認画面
 }
-if (!empty($_POST['btn_submit'])){
-    $pageFlag = 2;
+if (!empty($_POST['btn_submit'])) {
+    $pageFlag = 2;//登録画面
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <meta charset="UTF-8">
 <head>
     <title>入力フォーム</title>
+    <script src="/validation.js"></script>
 </head>
 <body>
 <h2>入力フォーム</h2>
 <!--入力画面-->
 <?php if ($pageFlag === 0) : ?>
-<form method="post" action="index.php">
-    姓
-    <input type="text" name="name_sei" value="<?php if (!empty($_POST['name_mei'])){$_POST['name_mei'];} ?>"></br>
-    名
-    <input type="text" name="name_mei"></br>
-    性別
-    <input type="radio" name="sex[]" value="男">男
-    <input type="radio" name="sex[]" value="女">女</br>
-    誕生日
-    <select name="year">
-        <option value="">-</option>
-        <option value="1900">1900</option>
-        <option value="1901">1901</option>
-        <option value="1902">1902</option>
-        <option value="1903">1903</option>
-        <option value="1904">1904</option>
-        <option value="1905">1905</option>
-        <option value="1906">1906</option>
-        <option value="1907">1907</option>
-        <option value="1908">1908</option>
-        <option value="1909">1909</option>
-        <option value="1910">1910</option>
-        <option value="1911">1911</option>
-        <option value="1912">1912</option>
-        <option value="1913">1913</option>
-        <option value="1914">1914</option>
-        <option value="1915">1915</option>
-        <option value="1916">1916</option>
-        <option value="1917">1917</option>
-        <option value="1918">1918</option>
-        <option value="1919">1919</option>
-        <option value="1920">1920</option>
-        <option value="1921">1921</option>
-        <option value="1922">1922</option>
-        <option value="1923">1923</option>
-        <option value="1924">1924</option>
-        <option value="1925">1925</option>
-        <option value="1926">1926</option>
-        <option value="1927">1927</option>
-        <option value="1928">1928</option>
-        <option value="1929">1929</option>
-        <option value="1930">1930</option>
-        <option value="1931">1931</option>
-        <option value="1932">1932</option>
-        <option value="1933">1933</option>
-        <option value="1934">1934</option>
-        <option value="1935">1935</option>
-        <option value="1936">1936</option>
-        <option value="1937">1937</option>
-        <option value="1938">1938</option>
-        <option value="1939">1939</option>
-        <option value="1940">1940</option>
-        <option value="1941">1941</option>
-        <option value="1942">1942</option>
-        <option value="1943">1943</option>
-        <option value="1944">1944</option>
-        <option value="1945">1945</option>
-        <option value="1946">1946</option>
-        <option value="1947">1947</option>
-        <option value="1948">1948</option>
-        <option value="1949">1949</option>
-        <option value="1950">1950</option>
-        <option value="1951">1951</option>
-        <option value="1952">1952</option>
-        <option value="1953">1953</option>
-        <option value="1954">1954</option>
-        <option value="1955">1955</option>
-        <option value="1956">1956</option>
-        <option value="1957">1957</option>
-        <option value="1958">1958</option>
-        <option value="1959">1959</option>
-        <option value="1960">1960</option>
-        <option value="1961">1961</option>
-        <option value="1962">1962</option>
-        <option value="1963">1963</option>
-        <option value="1964">1964</option>
-        <option value="1965">1965</option>
-        <option value="1966">1966</option>
-        <option value="1967">1967</option>
-        <option value="1968">1968</option>
-        <option value="1969">1969</option>
-        <option value="1970">1970</option>
-        <option value="1971">1971</option>
-        <option value="1972">1972</option>
-        <option value="1973">1973</option>
-        <option value="1974">1974</option>
-        <option value="1975">1975</option>
-        <option value="1976">1976</option>
-        <option value="1977">1977</option>
-        <option value="1978">1978</option>
-        <option value="1979">1979</option>
-        <option value="1980">1980</option>
-        <option value="1981">1981</option>
-        <option value="1982">1982</option>
-        <option value="1983">1983</option>
-        <option value="1984">1984</option>
-        <option value="1985">1985</option>
-        <option value="1986">1986</option>
-        <option value="1987">1987</option>
-        <option value="1988">1988</option>
-        <option value="1989">1989</option>
-        <option value="1990">1990</option>
-        <option value="1991">1991</option>
-        <option value="1992">1992</option>
-        <option value="1993">1993</option>
-        <option value="1994">1994</option>
-        <option value="1995">1995</option>
-        <option value="1996">1996</option>
-        <option value="1997">1997</option>
-        <option value="1998">1998</option>
-        <option value="1999">1999</option>
-        <option value="2000">2000</option>
-        <option value="2001">2001</option>
-        <option value="2002">2002</option>
-        <option value="2003">2003</option>
-        <option value="2004">2004</option>
-        <option value="2005">2005</option>
-        <option value="2006">2006</option>
-        <option value="2007">2007</option>
-        <option value="2008">2008</option>
-        <option value="2009">2009</option>
-        <option value="2010">2010</option>
-        <option value="2011">2011</option>
-        <option value="2012">2012</option>
-        <option value="2013">2013</option>
-        <option value="2014">2014</option>
-        <option value="2015">2015</option>
-        <option value="2016">2016</option>
-        <option value="2017">2017</option>
-        <option value="2018">2018</option>
-        <option value="2019">2019</option>
-        <option value="2020">2020</option>
-        <option value="2021">2021</option>
-    </select>　年
-    <select name="month">
-        <option value="">-</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-    </select>　月
-    <select name="day">
-        <option value="">-</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-        <option value="13">13</option>
-        <option value="14">14</option>
-        <option value="15">15</option>
-        <option value="16">16</option>
-        <option value="17">17</option>
-        <option value="18">18</option>
-        <option value="19">19</option>
-        <option value="20">20</option>
-        <option value="21">21</option>
-        <option value="22">22</option>
-        <option value="23">23</option>
-        <option value="24">24</option>
-        <option value="25">25</option>
-        <option value="26">26</option>
-        <option value="27">27</option>
-        <option value="28">28</option>
-        <option value="29">29</option>
-        <option value="30">30</option>
-        <option value="31">31</option>
-    </select>　日
-    運転免許証
-    <input type="checkbox" name="license[]" value="有">有
-    <input type="checkbox" name="license[]" value="無">無</br>
-    電話番号
-    <input type="text" name="number"></br>
-    メールアドレス
-    <input type="text" name="email"></br>
-    住所(都道府県)
-    <select name="pref">
-        <option value="">-</option>
-        <option value="1">北海道</option>
-        <option value="2">青森県</option>
-        <option value="3">岩手県</option>
-        <option value="4">宮城県</option>
-        <option value="5">秋田県</option>
-        <option value="6">山形県</option>
-        <option value="7">福島県</option>
-        <option value="8">茨城県</option>
-        <option value="9">栃木県</option>
-        <option value="10">群馬県</option>
-        <option value="11">埼玉県</option>
-        <option value="12">千葉県</option>
-        <option value="13">東京都</option>
-        <option value="14">神奈川県</option>
-        <option value="15">新潟県</option>
-        <option value="16">富山県</option>
-        <option value="17">石川県</option>
-        <option value="18">福井県</option>
-        <option value="19">山梨県</option>
-        <option value="20">長野県</option>
-        <option value="21">岐阜県</option>
-        <option value="22">静岡県</option>
-        <option value="23">愛知県</option>
-        <option value="24">三重県</option>
-        <option value="25">滋賀県</option>
-        <option value="26">京都府</option>
-        <option value="27">大阪府</option>
-        <option value="28">兵庫県</option>
-        <option value="29">奈良県</option>
-        <option value="30">和歌山県</option>
-        <option value="31">鳥取県</option>
-        <option value="32">島根県</option>
-        <option value="33">岡山県</option>
-        <option value="34">広島県</option>
-        <option value="35">山口県</option>
-        <option value="36">徳島県</option>
-        <option value="37">香川県</option>
-        <option value="38">愛媛県</option>
-        <option value="39">高知県</option>
-        <option value="40">福岡県</option>
-        <option value="41">佐賀県</option>
-        <option value="42">長崎県</option>
-        <option value="43">熊本県</option>
-        <option value="44">大分県</option>
-        <option value="45">宮崎県</option>
-        <option value="46">鹿児島県</option>
-        <option value="47">沖縄県</option>
-    </select>
-    住所(都道府県以下)
-    <input type= "text" name="address"></br>
-    メッセージ</br>
-    <textarea name="msg" cols=40 rows=4>
+    <?php
+    if (!isset($_SESSION['csrfToken'])) {
+        $csrfToken = bin2hex(random_bytes(32));
+        $_SESSION['csrfToken'] = $csrfToken;
+    }
+    $token = $_SESSION['csrfToken'];
+    ?>
+
+    <div id="error"></div>
+    <form id="form" method="post" action="index.php">
+        姓
+        <input id="name_sei" type="text" name="name_sei" value="<?php if (!empty($_POST['name_sei'])) {
+            echo h($_POST['name_sei']);
+        } ?>"></br>
+        名
+        <input id="name_mei" type="text" name="name_mei" value="<?php if (!empty($_POST['name_mei'])) {
+            echo h($_POST['name_mei']);
+        } ?>"></br>
+        性別
+        <input type="radio" name="sex" value="1" <?php if (!empty($_POST['sex']) && $_POST['sex'] === '1') {
+            echo 'checked';
+        } ?> required>男
+        <input type="radio" name="sex" value="2" <?php if (!empty($_POST['sex']) && $_POST['sex'] === '2') {
+            echo 'checked';
+        } ?>>女</br>
+        誕生日
+        <select name="year" value="<?php if (!empty($_POST['year'])) {
+            echo h($_POST['year']);
+        } ?>" required>
+            <option value="">-</option>
+            <option value="1900"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1900') {
+                    echo 'selected';
+                } ?>
+            >1900</option>
+            <option value="1901"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1901') {
+                    echo 'selected';
+                } ?>
+            >1901</option>
+            <option value="1902"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1902') {
+                    echo 'selected';
+                } ?>
+            >1902</option>
+            <option value="1903"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1903') {
+                    echo 'selected';
+                } ?>
+            >1903</option>
+            <option value="1904"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1904') {
+                    echo 'selected';
+                } ?>
+            >1904</option>
+            <option value="1905"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1905') {
+                    echo 'selected';
+                } ?>
+            >1905</option>
+            <option value="1906"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1906') {
+                    echo 'selected';
+                } ?>
+            >1906</option>
+            <option value="1907"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1907') {
+                    echo 'selected';
+                } ?>
+            >1907</option>
+            <option value="1908"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1908') {
+                    echo 'selected';
+                } ?>
+            >1908</option>
+            <option value="1909"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1909') {
+                    echo 'selected';
+                } ?>
+            >1909</option>
+            <option value="1910"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1910') {
+                    echo 'selected';
+                } ?>
+            >1910</option>
+            <option value="1911"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1911') {
+                    echo 'selected';
+                } ?>
+            >1911</option>
+            <option value="1912"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1912') {
+                    echo 'selected';
+                } ?>
+            >1912</option>
+            <option value="1913"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1913') {
+                    echo 'selected';
+                } ?>
+            >1913</option>
+            <option value="1914"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1914') {
+                    echo 'selected';
+                } ?>
+            >1914</option>
+            <option value="1915"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1915') {
+                    echo 'selected';
+                } ?>
+            >1915</option>
+            <option value="1916"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1916') {
+                    echo 'selected';
+                } ?>
+            >1916</option>
+            <option value="1917"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1917') {
+                    echo 'selected';
+                } ?>
+            >1917</option>
+            <option value="1918"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1918') {
+                    echo 'selected';
+                } ?>
+            >1918</option>
+            <option value="1919"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1919') {
+                    echo 'selected';
+                } ?>
+            >1919</option>
+            <option value="1920"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1920') {
+                    echo 'selected';
+                } ?>
+            >1920</option>
+            <option value="1921"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1921') {
+                    echo 'selected';
+                } ?>
+            >1921</option>
+            <option value="1922"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1922') {
+                    echo 'selected';
+                } ?>
+            >1922</option>
+            <option value="1923"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1923') {
+                    echo 'selected';
+                } ?>
+            >1923</option>
+            <option value="1924"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1924') {
+                    echo 'selected';
+                } ?>
+            >1924</option>
+            <option value="1925"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1925') {
+                    echo 'selected';
+                } ?>
+            >1925</option>
+            <option value="1926"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1926') {
+                    echo 'selected';
+                } ?>
+            >1926</option>
+            <option value="1927"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1927') {
+                    echo 'selected';
+                } ?>
+            >1927</option>
+            <option value="1928"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1928') {
+                    echo 'selected';
+                } ?>
+            >1928</option>
+            <option value="1929"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1929') {
+                    echo 'selected';
+                } ?>
+            >1929</option>
+            <option value="1930"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1930') {
+                    echo 'selected';
+                } ?>
+            >1930</option>
+            <option value="1931"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1931') {
+                    echo 'selected';
+                } ?>
+            >1931</option>
+            <option value="1932"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1932') {
+                    echo 'selected';
+                } ?>
+            >1932</option>
+            <option value="1933"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1933') {
+                    echo 'selected';
+                } ?>
+            >1933</option>
+            <option value="1934"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1934') {
+                    echo 'selected';
+                } ?>
+            >1934</option>
+            <option value="1935"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1935') {
+                    echo 'selected';
+                } ?>
+            >1935</option>
+            <option value="1936"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1936') {
+                    echo 'selected';
+                } ?>
+            >1936</option>
+            <option value="1937"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1937') {
+                    echo 'selected';
+                } ?>
+            >1937</option>
+            <option value="1938"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1938') {
+                    echo 'selected';
+                } ?>
+            >1938</option>
+            <option value="1939"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1939') {
+                    echo 'selected';
+                } ?>
+            >1939</option>
+            <option value="1940"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1940') {
+                    echo 'selected';
+                } ?>
+            >1940</option>
+            <option value="1941"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1941') {
+                    echo 'selected';
+                } ?>
+            >1941</option>
+            <option value="1942"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1942') {
+                    echo 'selected';
+                } ?>
+            >1942</option>
+            <option value="1943"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1943') {
+                    echo 'selected';
+                } ?>
+            >1943</option>
+            <option value="1944"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1944') {
+                    echo 'selected';
+                } ?>
+            >1944</option>
+            <option value="1945"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1945') {
+                    echo 'selected';
+                } ?>
+            >1945</option>
+            <option value="1946"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1946') {
+                    echo 'selected';
+                } ?>
+            >1946</option>
+            <option value="1947"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1947') {
+                    echo 'selected';
+                } ?>
+            >1947</option>
+            <option value="1948"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1948') {
+                    echo 'selected';
+                } ?>
+            >1948</option>
+            <option value="1949"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1949') {
+                    echo 'selected';
+                } ?>
+            >1949</option>
+            <option value="1950"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1950') {
+                    echo 'selected';
+                } ?>
+            >1950</option>
+            <option value="1951"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1951') {
+                    echo 'selected';
+                } ?>
+            >1951</option>
+            <option value="1952"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1952') {
+                    echo 'selected';
+                } ?>
+            >1952</option>
+            <option value="1953"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1953') {
+                    echo 'selected';
+                } ?>
+            >1953</option>
+            <option value="1954"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1954') {
+                    echo 'selected';
+                } ?>
+            >1954</option>
+            <option value="1955"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1955') {
+                    echo 'selected';
+                } ?>
+            >1955</option>
+            <option value="1956"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1956') {
+                    echo 'selected';
+                } ?>
+            >1956</option>
+            <option value="1957"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1957') {
+                    echo 'selected';
+                } ?>
+            >1957</option>
+            <option value="1958"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1958') {
+                    echo 'selected';
+                } ?>
+            >1958</option>
+            <option value="1959"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1959') {
+                    echo 'selected';
+                } ?>
+            >1959</option>
+            <option value="1960"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1960') {
+                    echo 'selected';
+                } ?>
+            >1960</option>
+            <option value="1961"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1961') {
+                    echo 'selected';
+                } ?>
+            >1961</option>
+            <option value="1962"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1962') {
+                    echo 'selected';
+                } ?>
+            >1962</option>
+            <option value="1963"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1963') {
+                    echo 'selected';
+                } ?>
+            >1963</option>
+            <option value="1964"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1964') {
+                    echo 'selected';
+                } ?>
+            >1964</option>
+            <option value="1965"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1965') {
+                    echo 'selected';
+                } ?>
+            >1965</option>
+            <option value="1966"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1966') {
+                    echo 'selected';
+                } ?>
+            >1966</option>
+            <option value="1967"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1967') {
+                    echo 'selected';
+                } ?>
+            >1967</option>
+            <option value="1968"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1968') {
+                    echo 'selected';
+                } ?>
+            >1968</option>
+            <option value="1969"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1969') {
+                    echo 'selected';
+                } ?>
+            >1969</option>
+            <option value="1970"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1970') {
+                    echo 'selected';
+                } ?>
+            >1970</option>
+            <option value="1971"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1971') {
+                    echo 'selected';
+                } ?>
+            >1971</option>
+            <option value="1972"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1972') {
+                    echo 'selected';
+                } ?>
+            >1972</option>
+            <option value="1973"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1973') {
+                    echo 'selected';
+                } ?>
+            >1973</option>
+            <option value="1974"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1974') {
+                    echo 'selected';
+                } ?>
+            >1974</option>
+            <option value="1975"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1975') {
+                    echo 'selected';
+                } ?>
+            >1975</option>
+            <option value="1976"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1976') {
+                    echo 'selected';
+                } ?>
+            >1976</option>
+            <option value="1977"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1977') {
+                    echo 'selected';
+                } ?>
+            >1977</option>
+            <option value="1978"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1978') {
+                    echo 'selected';
+                } ?>
+            >1978</option>
+            <option value="1979"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1979') {
+                    echo 'selected';
+                } ?>
+            >1979</option>
+            <option value="1980"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1980') {
+                    echo 'selected';
+                } ?>
+            >1980</option>
+            <option value="1981"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1981') {
+                    echo 'selected';
+                } ?>
+            >1981</option>
+            <option value="1982"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1982') {
+                    echo 'selected';
+                } ?>
+            >1982</option>
+            <option value="1983"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1983') {
+                    echo 'selected';
+                } ?>
+            >1983</option>
+            <option value="1984"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1984') {
+                    echo 'selected';
+                } ?>
+            >1984</option>
+            <option value="1985"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1985') {
+                    echo 'selected';
+                } ?>
+            >1985</option>
+            <option value="1986"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1986') {
+                    echo 'selected';
+                } ?>
+            >1986</option>
+            <option value="1987"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1987') {
+                    echo 'selected';
+                } ?>
+            >1987</option>
+            <option value="1988"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1988') {
+                    echo 'selected';
+                } ?>
+            >1988</option>
+            <option value="1989"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1989') {
+                    echo 'selected';
+                } ?>
+            >1989</option>
+            <option value="1990"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1990') {
+                    echo 'selected';
+                } ?>
+            >1990</option>
+            <option value="1991"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1991') {
+                    echo 'selected';
+                } ?>
+            >1991</option>
+            <option value="1992"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1992') {
+                    echo 'selected';
+                } ?>
+            >1992</option>
+            <option value="1993"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1993') {
+                    echo 'selected';
+                } ?>
+            >1993</option>
+            <option value="1994"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1994') {
+                    echo 'selected';
+                } ?>
+            >1994</option>
+            <option value="1995"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1995') {
+                    echo 'selected';
+                } ?>
+            >1995</option>
+            <option value="1996"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1996') {
+                    echo 'selected';
+                } ?>
+            >1996</option>
+            <option value="1997"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1997') {
+                    echo 'selected';
+                } ?>
+            >1997</option>
+            <option value="1998"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1998') {
+                    echo 'selected';
+                } ?>
+            >1998</option>
+            <option value="1999"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '1999') {
+                    echo 'selected';
+                } ?>
+            >1999</option>
+            <option value="2000"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '2000') {
+                    echo 'selected';
+                } ?>
+            >2000</option>
+            <option value="2001"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '2001') {
+                    echo 'selected';
+                } ?>
+            >2001</option>
+            <option value="2002"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '2002') {
+                    echo 'selected';
+                } ?>
+            >2002</option>
+            <option value="2003"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '2003') {
+                    echo 'selected';
+                } ?>
+            >2003</option>
+            <option value="2004"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '2004') {
+                    echo 'selected';
+                } ?>
+            >2004</option>
+            <option value="2005"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '2005') {
+                    echo 'selected';
+                } ?>
+            >2005</option>
+            <option value="2006"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '2006') {
+                    echo 'selected';
+                } ?>
+            >2006</option>
+            <option value="2007"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '2007') {
+                    echo 'selected';
+                } ?>
+            >2007</option>
+            <option value="2008"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '2008') {
+                    echo 'selected';
+                } ?>
+            >2008</option>
+            <option value="2009"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '2009') {
+                    echo 'selected';
+                } ?>
+            >2009</option>
+            <option value="2010"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '2010') {
+                    echo 'selected';
+                } ?>
+            >2010</option>
+            <option value="2011"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '2011') {
+                    echo 'selected';
+                } ?>
+            >2011</option>
+            <option value="2012"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '2012') {
+                    echo 'selected';
+                } ?>
+            >2012</option>
+            <option value="2013"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '2013') {
+                    echo 'selected';
+                } ?>
+            >2013</option>
+            <option value="2014"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '2014') {
+                    echo 'selected';
+                } ?>
+            >2014</option>
+            <option value="2015"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '2015') {
+                    echo 'selected';
+                } ?>
+            >2015</option>
+            <option value="2016"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '2016') {
+                    echo 'selected';
+                } ?>
+            >2016</option>
+            <option value="2017"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '2017') {
+                    echo 'selected';
+                } ?>
+            >2017</option>
+            <option value="2018"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '2018') {
+                    echo 'selected';
+                } ?>
+            >2018</option>
+            <option value="2019"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '2019') {
+                    echo 'selected';
+                } ?>
+            >2019</option>
+            <option value="2020"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '2020') {
+                    echo 'selected';
+                } ?>
+            >2020</option>
+            <option value="2021"
+                <?php if (!empty($_POST['year']) && $_POST['year'] === '2021') {
+                    echo 'selected';
+                } ?>
+            >2021</option>
+        </select>年
+        <select name="month" value="<?php if (!empty($_POST['month'])) {
+            echo h($_POST['month']);
+        } ?>" required>
+            <option value="">-</option>
+            <option value="1"
+            >1</option>
+            <option value="2"
+            >2</option>
+            <option value="3"
+            >3</option>
+            <option value="4"
+            >4</option>
+            <option value="5"
+            >5</option>
+            <option value="6"
+            >6</option>
+            <option value="7"
+            >7</option>
+            <option value="8"
+            >8</option>
+            <option value="9"
+            >9</option>
+            <option value="10"
+            >10</option>
+            <option value="11"
+            >11</option>
+            <option value="12"
+            >12</option>
+        </select>月
+        <select name="day" value="<?php if (!empty($_POST['day'])) {
+            echo h($_POST['day']);
+        } ?>" required>
+            <option value="">-</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+            <option value="31">31</option>
+        </select>日
+        </br>
+        運転免許証
+        <input type="checkbox" name="license" value="1">(持っている方のみチェック)
+        </br>
+        電話番号
+        <input type="text" name="number" value="<?php if (!empty($_POST['number'])) {
+            echo h($_POST['number']);
+        } ?>" required></br>
+        メールアドレス
+        <input type="text" name="email" value="<?php if (!empty($_POST['email'])) {
+            echo h($_POST['email']);
+        } ?>" required>
+        </br>
+        住所(都道府県)
+        <select name="pref" value="<?php if (!empty($_POST['pref'])) {
+            echo h($_POST['pref']);
+        } ?>" required>
+            <option value="">-</option>
+            <option value="1">北海道</option>
+            <option value="2">青森県</option>
+            <option value="3">岩手県</option>
+            <option value="4">宮城県</option>
+            <option value="5">秋田県</option>
+            <option value="6">山形県</option>
+            <option value="7">福島県</option>
+            <option value="8">茨城県</option>
+            <option value="9">栃木県</option>
+            <option value="10">群馬県</option>
+            <option value="11">埼玉県</option>
+            <option value="12">千葉県</option>
+            <option value="13">東京都</option>
+            <option value="14">神奈川県</option>
+            <option value="15">新潟県</option>
+            <option value="16">富山県</option>
+            <option value="17">石川県</option>
+            <option value="18">福井県</option>
+            <option value="19">山梨県</option>
+            <option value="20">長野県</option>
+            <option value="21">岐阜県</option>
+            <option value="22">静岡県</option>
+            <option value="23">愛知県</option>
+            <option value="24">三重県</option>
+            <option value="25">滋賀県</option>
+            <option value="26">京都府</option>
+            <option value="27">大阪府</option>
+            <option value="28">兵庫県</option>
+            <option value="29">奈良県</option>
+            <option value="30">和歌山県</option>
+            <option value="31">鳥取県</option>
+            <option value="32">島根県</option>
+            <option value="33">岡山県</option>
+            <option value="34">広島県</option>
+            <option value="35">山口県</option>
+            <option value="36">徳島県</option>
+            <option value="37">香川県</option>
+            <option value="38">愛媛県</option>
+            <option value="39">高知県</option>
+            <option value="40">福岡県</option>
+            <option value="41">佐賀県</option>
+            <option value="42">長崎県</option>
+            <option value="43">熊本県</option>
+            <option value="44">大分県</option>
+            <option value="45">宮崎県</option>
+            <option value="46">鹿児島県</option>
+            <option value="47">沖縄県</option>
+        </select>
+        </br>
+        住所(都道府県以下)
+        <input type="text" name="address" value="<?php if (!empty($_POST['address'])) {
+            echo h($_POST['address']);
+        } ?>" required>
+        </br>
+        メッセージ
+        </br>
+        <textarea id="msg" name="msg" required>
+            <?php if (!empty($_POST['msg'])) {
+                echo h($_POST['msg']);
+            } ?>
     </textarea>
-    </br>
-    <input type="submit" name="btn_confirm" value="確認画面へ">
-</form>
+        </br>
+        <button type="submit" onclick="checkName()" name="btn_confirm" value="確認画面へ">確認画面へ</button>
+        <input type="hidden" name="csrf" value="<?php echo $token; ?>">
+    </form>
+
 <?php endif; ?>
 
 <!--確認画面-->
 <?php if ($pageFlag === 1) : ?>
-
-<?php //var_dump($_POST['sex']); ?>
-<!--    </br>-->
-<?php //var_dump($_POST['name_mei']); ?>
-<!--    </br>-->
-<!--    --><?php //var_dump($_POST['name_sei']); ?>
-
-    <?php
-    foreach($_POST['sex'] as $key => $value) {
-        $_POST['sex'] = $value;
-    }
-    ?>
-    <?php
-    foreach($_POST['license'] as $key => $value) {
-        $_POST['license'] = $value;
-    }
-    ?>
-    <form method="post" action="index.php">
-        姓
-        <?php echo $_POST['name_sei']; ?>
-        </br>
-        名
-        <?php echo $_POST['name_mei']; ?>
-        </br>
-        性別
-        <?php echo $_POST['sex']; ?>
-        </br>
-        誕生日
-        <?php echo $_POST['year']; ?>年
-        <?php echo $_POST['month']; ?>月
-        <?php echo $_POST['day']; ?>日
-        </br>
-        運転免許証
-        <?php echo $_POST['license']; ?>
-        </br>
-        電話番号
-        <?php echo $_POST['number']; ?>
-        </br>
-        メールアドレス
-        <?php echo $_POST['email']; ?>
-        </br>
-        住所
-        <?php echo $_POST['pref']; ?>
-        <?php echo $_POST['address']; ?>
-        </br>
-        メッセージ
-        <?php echo $_POST['msg']; ?>
-        </br>
-        <input type="submit" name="back" value="入力画面へ">
-        <input type="submit" name="btn_submit" value="確認画面へ">
-        <input type="hidden" name="name_sei" value="<?php echo $_POST['name_sei'];?>">
-        <input type="hidden" name="name_mei" value="<?php echo $_POST['name_mei'];?>">
-        <input type="hidden" name="sex" value="<?php echo $_POST['sex'];?>">
-        <input type="hidden" name="year" value="<?php echo $_POST['year'];?>">
-        <input type="hidden" name="month" value="<?php echo $_POST['month'];?>">
-        <input type="hidden" name="day" value="<?php echo $_POST['day'];?>">
-        <input type="hidden" name="license" value="<?php echo $_POST['license'];?>">
-        <input type="hidden" name="number" value="<?php echo $_POST['number'];?>">
-        <input type="hidden" name="email" value="<?php echo $_POST['email'];?>">
-        <input type="hidden" name="pref" value="<?php echo $_POST['pref'];?>">
-        <input type="hidden" name="address" value="<?php echo $_POST['address'];?>">
-        <input type="hidden" name="msg" value="<?php echo $_POST['msg'];?>">
-    </form>
+    <?php if ($_POST['csrf'] === $_SESSION['csrfToken']) : ?>
+        <!--    --><?php
+//    foreach ($_POST['sex'] as $key => $value) {
+//        $_POST['sex'] = $value;
+//    }
+//    ?>
+        <!--    --><?php
+//    foreach ($_POST['license'] as $key => $value) {
+//        $_POST['license'] = $value;
+//    }
+//    ?>
+        <form method="post" action="index.php">
+            姓
+            <?php echo h($_POST['name_sei']); ?>
+            </br>
+            名
+            <?php echo h($_POST['name_mei']); ?>
+            </br>
+            性別
+            <?php
+            if ($_POST['sex'] === '1') {
+                {
+                    echo '男性';
+                }
+            }
+            if ($_POST['sex'] === '2') {
+                {
+                    echo '女性';
+                }
+            }
+            ?>
+            </br>
+            誕生日
+            <?php echo h($_POST['year']); ?>年
+            <?php echo h($_POST['month']); ?>月
+            <?php echo h($_POST['day']); ?>日
+            </br>
+            運転免許証
+            <?php
+            if (!empty($_POST['license'])) {
+                {
+                    echo '有';
+                }
+            }
+            if (empty($_POST['license'])) {
+                {
+                    echo '無';
+                }
+            }
+            ?>
+            </br>
+            電話番号
+            <?php echo h($_POST['number']); ?>
+            </br>
+            メールアドレス
+            <?php echo h($_POST['email']); ?>
+            </br>
+            住所
+            <?php echo h($_POST['pref']); ?>
+            <?php echo h($_POST['address']); ?>
+            </br>
+            メッセージ
+            <?php echo h($_POST['msg']); ?>
+            </br>
+            <input type="submit" name="back" value="入力画面へ">入力画面へ
+            <button type="submit" name="btn_submit" value="登録">登録</button>
+            <input type="hidden" name="name_sei" value="<?php echo h($_POST['name_sei']); ?>">
+            <input type="hidden" name="name_mei" value="<?php echo h($_POST['name_mei']); ?>">
+            <input type="hidden" name="sex" value="<?php echo h($_POST['sex']); ?>">
+            <input type="hidden" name="year" value="<?php echo h($_POST['year']); ?>">
+            <input type="hidden" name="month" value="<?php echo h($_POST['month']); ?>">
+            <input type="hidden" name="day" value="<?php echo h($_POST['day']); ?>">
+            <input type="hidden" name="license" value="<?php echo h($_POST['license']); ?>">
+            <input type="hidden" name="number" value="<?php echo h($_POST['number']); ?>">
+            <input type="hidden" name="email" value="<?php echo h($_POST['email']); ?>">
+            <input type="hidden" name="pref" value="<?php echo h($_POST['pref']); ?>">
+            <input type="hidden" name="address" value="<?php echo h($_POST['address']); ?>">
+            <input type="hidden" name="msg" value="<?php echo h($_POST['msg']); ?>">
+            <input type="hidden" name="csrf" value="<?php echo h($_POST['csrf']); ?>">
+        </form>
+    <?php endif; ?>
 <?php endif; ?>
 <!--登録画面-->
 <?php if ($pageFlag === 2) : ?>
-    登録しました。
+    <?php if ($_POST['csrf'] === $_SESSION['csrfToken']) : ?>
+        登録しました。
+        <?php unset($_SESSION['csrfToken']); ?>
+    <?php endif; ?>
 <?php endif; ?>
 
 </body>
