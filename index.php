@@ -671,70 +671,226 @@ if (!empty($_POST['btn_submit'])) {
                 } ?>
             >2021</option>
         </select>年
-        <select name="month" value="<?php if (!empty($_POST['month'])) {
-            echo h($_POST['month']);
-        } ?>" required>
+        <select name="month" required>
             <option value="">-</option>
             <option value="1"
+                <?php if (!empty($_POST['month']) && $_POST['month'] === '1') {
+                    echo 'selected';
+                } ?>
             >1</option>
             <option value="2"
+                <?php if (!empty($_POST['month']) && $_POST['month'] === '2') {
+                    echo 'selected';
+                } ?>
             >2</option>
             <option value="3"
+                <?php if (!empty($_POST['month']) && $_POST['month'] === '3') {
+                    echo 'selected';
+                } ?>
             >3</option>
             <option value="4"
+                <?php if (!empty($_POST['month']) && $_POST['month'] === '4') {
+                    echo 'selected';
+                } ?>
             >4</option>
             <option value="5"
+                <?php if (!empty($_POST['month']) && $_POST['month'] === '5') {
+                    echo 'selected';
+                } ?>
             >5</option>
             <option value="6"
+                <?php if (!empty($_POST['month']) && $_POST['month'] === '6') {
+                    echo 'selected';
+                } ?>
             >6</option>
             <option value="7"
+                <?php if (!empty($_POST['month']) && $_POST['month'] === '7') {
+                    echo 'selected';
+                } ?>
             >7</option>
             <option value="8"
+                <?php if (!empty($_POST['month']) && $_POST['month'] === '8') {
+                    echo 'selected';
+                } ?>
             >8</option>
             <option value="9"
+                <?php if (!empty($_POST['month']) && $_POST['month'] === '9') {
+                    echo 'selected';
+                } ?>
             >9</option>
             <option value="10"
+                <?php if (!empty($_POST['month']) && $_POST['month'] === '10') {
+                    echo 'selected';
+                } ?>
             >10</option>
             <option value="11"
+                <?php if (!empty($_POST['month']) && $_POST['month'] === '11') {
+                    echo 'selected';
+                } ?>
             >11</option>
             <option value="12"
+                <?php if (!empty($_POST['month']) && $_POST['month'] === '12') {
+                    echo 'selected';
+                } ?>
             >12</option>
         </select>月
-        <select name="day" value="<?php if (!empty($_POST['day'])) {
-            echo h($_POST['day']);
-        } ?>" required>
+        <select name="day" required>
             <option value="">-</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-            <option value="13">13</option>
-            <option value="14">14</option>
-            <option value="15">15</option>
-            <option value="16">16</option>
-            <option value="17">17</option>
-            <option value="18">18</option>
-            <option value="19">19</option>
-            <option value="20">20</option>
-            <option value="21">21</option>
-            <option value="22">22</option>
-            <option value="23">23</option>
-            <option value="24">24</option>
-            <option value="25">25</option>
-            <option value="26">26</option>
-            <option value="27">27</option>
-            <option value="28">28</option>
-            <option value="29">29</option>
-            <option value="30">30</option>
-            <option value="31">31</option>
+            <option value="1"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '1') {
+                    echo 'selected';
+                } ?>
+            >1</option>
+            <option value="2"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '2') {
+                    echo 'selected';
+                } ?>
+            >2</option>
+            <option value="3"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '3') {
+                    echo 'selected';
+                } ?>
+            >3</option>
+            <option value="4"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '4') {
+                    echo 'selected';
+                } ?>
+            >4</option>
+            <option value="5"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '5') {
+                    echo 'selected';
+                } ?>
+            >5</option>
+            <option value="6"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '6') {
+                    echo 'selected';
+                } ?>
+            >6</option>
+            <option value="7"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '7') {
+                    echo 'selected';
+                } ?>
+            >7</option>
+            <option value="8"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '8') {
+                    echo 'selected';
+                } ?>
+            >8</option>
+            <option value="9"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '9') {
+                    echo 'selected';
+                } ?>
+            >9</option>
+            <option value="10"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '10') {
+                    echo 'selected';
+                } ?>
+            >10</option>
+            <option value="11"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '11') {
+                    echo 'selected';
+                } ?>
+            >11</option>
+            <option value="12"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '12') {
+                    echo 'selected';
+                } ?>
+            >12</option>
+            <option value="13"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '13') {
+                    echo 'selected';
+                } ?>
+            >13</option>
+            <option value="14"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '14') {
+                    echo 'selected';
+                } ?>
+            >14</option>
+            <option value="15"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '15') {
+                    echo 'selected';
+                } ?>
+            >15</option>
+            <option value="16"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '16') {
+                    echo 'selected';
+                } ?>
+            >16</option>
+            <option value="17"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '17') {
+                    echo 'selected';
+                } ?>
+            >17</option>
+            <option value="18"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '18') {
+                    echo 'selected';
+                } ?>
+            >18</option>
+            <option value="19"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '19') {
+                    echo 'selected';
+                } ?>
+            >19</option>
+            <option value="20"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '20') {
+                    echo 'selected';
+                } ?>
+            >20</option>
+            <option value="21"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '21') {
+                    echo 'selected';
+                } ?>
+            >21</option>
+            <option value="22"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '22') {
+                    echo 'selected';
+                } ?>
+            >22</option>
+            <option value="23"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '23') {
+                    echo 'selected';
+                } ?>
+            >23</option>
+            <option value="24"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '24') {
+                    echo 'selected';
+                } ?>
+            >24</option>
+            <option value="25"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '25') {
+                    echo 'selected';
+                } ?>
+            >25</option>
+            <option value="26"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '26') {
+                    echo 'selected';
+                } ?>
+            >26</option>
+            <option value="27"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '27') {
+                    echo 'selected';
+                } ?>
+            >27</option>
+            <option value="28"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '28') {
+                    echo 'selected';
+                } ?>
+            >28</option>
+            <option value="29"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '29') {
+                    echo 'selected';
+                } ?>
+            >29</option>
+            <option value="30"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '30') {
+                    echo 'selected';
+                } ?>
+            >30</option>
+            <option value="31"
+                <?php if (!empty($_POST['day']) && $_POST['day'] === '31') {
+                    echo 'selected';
+                } ?>
+            >31</option>
         </select>日
         </br>
         運転免許証
