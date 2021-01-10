@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "IDとパスワードを入力してください"
+AuthUserFile /Users/developer/projects/Form_bp/.htpasswd
+require valid-user

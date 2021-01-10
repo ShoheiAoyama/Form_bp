@@ -1,4 +1,19 @@
 /*共通*/
+/*body {*/
+/*    text-align: center;*/
+/*}*/
+/*form {*/
+/*    width: 100%;*/
+/*    margin: 0 auto;*/
+/*    text-align: left;*/
+/*}*/
+
+/*.container {*/
+/*    width: 100%;*/
+/*    margin: 0 auto;*/
+/*    text-align: left;*/
+/*}*/
+
 .bc-color1 {
     background-color: white;
     background-size: cover;
@@ -47,10 +62,10 @@ p, input, label {
 }
 
 /*登録画面*/
-.title-f2 {
-    margin-top: 80px;
-    margin-bottom: 100px;
-    color: white;
-    font-weight: 300;
-}
+/*.title-f2 {*/
+/*    margin-top: 80px;*/
+/*    margin-bottom: 100px;*/
+/*    color: white;*/
+/*    font-weight: 300;*/
+/*}*/
 

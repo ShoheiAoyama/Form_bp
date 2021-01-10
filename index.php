@@ -35,10 +35,15 @@ if (!empty($_POST['btn_submit'])) {
     <script type="text/javascript" src="js/validation.js"></script>
 </head>
 <body>
+<div id="wrapper">
 <!--タイトル部分-->
 <div class="bc-color1">
     <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
         <h2>Please fill out the form<small>Please fill out the form below and press the submit button.</small></h2>
+    </div>
+        </div>
     </div>
 </div>
 <!--入力画面-->
@@ -51,11 +56,18 @@ if (!empty($_POST['btn_submit'])) {
     }
     $token = $_SESSION['csrfToken'];
     ?>
+<!--誕生日データ結合-->
+    <script type="text/javascript">
+        function birth(f) {
+            f.elements['birthday'].value = f.elements['year'].value + f.elements['month'].value + f.elements['day'].value;
+        }
+    </script>
+
     <div id="error"></div>
     <div class="bc-color2">
         <div class="container pt-5">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 mx-auto">
                     <form id="form" method="post" action="index.php">
                         <div class="form-group">
                             <label for="formGroupExampleInput">氏名</label>
@@ -95,7 +107,7 @@ if (!empty($_POST['btn_submit'])) {
                             <div class="form-row">
                                 <div class="col">
 
-                                    <select class="form-control" name="year" value="<?php if (!empty($_POST['year'])) {
+                                    <select class="form-control" name="year" onchange="birth(this.form)" value="<?php if (!empty($_POST['year'])) {
                                         echo h($_POST['year']);
                                     } ?>" required>
                                         <option value="">年</option>
@@ -834,58 +846,58 @@ if (!empty($_POST['btn_submit'])) {
                                     </select>
                                 </div>
                                 <div class="col">
-                                    <select class="form-control" name="month" required>
+                                    <select class="form-control" name="month" onchange="birth(this.form)" required>
                                         <option value="">月</option>
-                                        <option value="1"
-                                            <?php if (!empty($_POST['month']) && $_POST['month'] === '1') {
+                                        <option value="01"
+                                            <?php if (!empty($_POST['month']) && $_POST['month'] === '01') {
                                                 echo 'selected';
                                             } ?>
                                         >1
                                         </option>
-                                        <option value="2"
-                                            <?php if (!empty($_POST['month']) && $_POST['month'] === '2') {
+                                        <option value="02"
+                                            <?php if (!empty($_POST['month']) && $_POST['month'] === '02') {
                                                 echo 'selected';
                                             } ?>
                                         >2
                                         </option>
-                                        <option value="3"
-                                            <?php if (!empty($_POST['month']) && $_POST['month'] === '3') {
+                                        <option value="03"
+                                            <?php if (!empty($_POST['month']) && $_POST['month'] === '03') {
                                                 echo 'selected';
                                             } ?>
                                         >3
                                         </option>
-                                        <option value="4"
-                                            <?php if (!empty($_POST['month']) && $_POST['month'] === '4') {
+                                        <option value="04"
+                                            <?php if (!empty($_POST['month']) && $_POST['month'] === '04') {
                                                 echo 'selected';
                                             } ?>
                                         >4
                                         </option>
-                                        <option value="5"
-                                            <?php if (!empty($_POST['month']) && $_POST['month'] === '5') {
+                                        <option value="05"
+                                            <?php if (!empty($_POST['month']) && $_POST['month'] === '05') {
                                                 echo 'selected';
                                             } ?>
                                         >5
                                         </option>
-                                        <option value="6"
-                                            <?php if (!empty($_POST['month']) && $_POST['month'] === '6') {
+                                        <option value="06"
+                                            <?php if (!empty($_POST['month']) && $_POST['month'] === '06') {
                                                 echo 'selected';
                                             } ?>
                                         >6
                                         </option>
-                                        <option value="7"
-                                            <?php if (!empty($_POST['month']) && $_POST['month'] === '7') {
+                                        <option value="07"
+                                            <?php if (!empty($_POST['month']) && $_POST['month'] === '07') {
                                                 echo 'selected';
                                             } ?>
                                         >7
                                         </option>
-                                        <option value="8"
-                                            <?php if (!empty($_POST['month']) && $_POST['month'] === '8') {
+                                        <option value="08"
+                                            <?php if (!empty($_POST['month']) && $_POST['month'] === '08') {
                                                 echo 'selected';
                                             } ?>
                                         >8
                                         </option>
-                                        <option value="9"
-                                            <?php if (!empty($_POST['month']) && $_POST['month'] === '9') {
+                                        <option value="09"
+                                            <?php if (!empty($_POST['month']) && $_POST['month'] === '09') {
                                                 echo 'selected';
                                             } ?>
                                         >9
@@ -911,58 +923,58 @@ if (!empty($_POST['btn_submit'])) {
                                     </select>
                                 </div>
                                 <div class="col">
-                                    <select class="form-control" name="day" required>
+                                    <select class="form-control" onchange="birth(this.form)" name="day" required>
                                         <option value="">日</option>
-                                        <option value="1"
-                                            <?php if (!empty($_POST['day']) && $_POST['day'] === '1') {
+                                        <option value="01"
+                                            <?php if (!empty($_POST['day']) && $_POST['day'] === '01') {
                                                 echo 'selected';
                                             } ?>
                                         >1
                                         </option>
-                                        <option value="2"
-                                            <?php if (!empty($_POST['day']) && $_POST['day'] === '2') {
+                                        <option value="02"
+                                            <?php if (!empty($_POST['day']) && $_POST['day'] === '02') {
                                                 echo 'selected';
                                             } ?>
                                         >2
                                         </option>
-                                        <option value="3"
-                                            <?php if (!empty($_POST['day']) && $_POST['day'] === '3') {
+                                        <option value="03"
+                                            <?php if (!empty($_POST['day']) && $_POST['day'] === '03') {
                                                 echo 'selected';
                                             } ?>
                                         >3
                                         </option>
-                                        <option value="4"
-                                            <?php if (!empty($_POST['day']) && $_POST['day'] === '4') {
+                                        <option value="04"
+                                            <?php if (!empty($_POST['day']) && $_POST['day'] === '04') {
                                                 echo 'selected';
                                             } ?>
                                         >4
                                         </option>
-                                        <option value="5"
-                                            <?php if (!empty($_POST['day']) && $_POST['day'] === '5') {
+                                        <option value="05"
+                                            <?php if (!empty($_POST['day']) && $_POST['day'] === '05') {
                                                 echo 'selected';
                                             } ?>
                                         >5
                                         </option>
-                                        <option value="6"
-                                            <?php if (!empty($_POST['day']) && $_POST['day'] === '6') {
+                                        <option value="06"
+                                            <?php if (!empty($_POST['day']) && $_POST['day'] === '06') {
                                                 echo 'selected';
                                             } ?>
                                         >6
                                         </option>
-                                        <option value="7"
-                                            <?php if (!empty($_POST['day']) && $_POST['day'] === '7') {
+                                        <option value="07"
+                                            <?php if (!empty($_POST['day']) && $_POST['day'] === '07') {
                                                 echo 'selected';
                                             } ?>
                                         >7
                                         </option>
-                                        <option value="8"
-                                            <?php if (!empty($_POST['day']) && $_POST['day'] === '8') {
+                                        <option value="08"
+                                            <?php if (!empty($_POST['day']) && $_POST['day'] === '08') {
                                                 echo 'selected';
                                             } ?>
                                         >8
                                         </option>
-                                        <option value="9"
-                                            <?php if (!empty($_POST['day']) && $_POST['day'] === '9') {
+                                        <option value="09"
+                                            <?php if (!empty($_POST['day']) && $_POST['day'] === '09') {
                                                 echo 'selected';
                                             } ?>
                                         >9
@@ -1104,14 +1116,13 @@ if (!empty($_POST['btn_submit'])) {
                             </div>
                         </div>
                         </br>
+                        <input type="hidden" name="birthday" value="<?php echo h($_POST['birthday']); ?>">
+                        </br>
                         <div class="form-group">
                             <label for="formGroupExampleInput">運転免許証</label>
                         </div>
                         <div class="form-check">
-                            <input type="checkbox" name="license"
-                                   value="1" <?php if (!empty($_POST['license']) && $_POST['license'] === '1') {
-                                echo 'checked';
-                            } ?>>
+                            <input type="checkbox" name="license" value="1" <?php if (!empty($_POST['license']) && $_POST['license'] === '1') { echo 'checked="checked"';} ?>>
                             <label class="form-check-label" for="defaultCheck1">(持っている方のみチェック)</label>
                         </div>
                         </br>
@@ -1456,11 +1467,14 @@ if (!empty($_POST['btn_submit'])) {
 <?php if ($pageFlag === 1) : ?>
     <!--csrf-->
     <?php if ($_POST['csrf'] === $_SESSION['csrfToken']) : ?>
-
+<?php //if (empty($_POST['license']) && $_POST['license'] != '1'){
+//            $_POST['license'] = '0';
+//} ?>
+    <?php if (!isset($_POST['license'])){$_POST['license'] = '0';}?>
         <div class="bc-color2">
             <div class="container pt-5">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 mx-auto">
                         <form method="post" action="index.php">
                             <div class="form-group">
                                 <label class="title-f1" for="formGroupExampleInput">姓</label>
@@ -1546,8 +1560,149 @@ if (!empty($_POST['btn_submit'])) {
                                 <label class="title-f1" for="formGroupExampleInput">住所</label>
                                 </br>
                                 <div class="title2-f1">
-                                    <?php echo h($_POST['pref']); ?>
-                                    <?php echo h($_POST['address']); ?>
+                                    <?php
+                                    if (h($_POST['pref']) === '1'){
+                                        echo '北海道'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '2'){
+                                        echo '青森県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '3'){
+                                        echo '岩手県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '4'){
+                                        echo '宮城県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '5'){
+                                        echo '秋田県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '6'){
+                                        echo '山形県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '7'){
+                                        echo '福島県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '8'){
+                                        echo '茨城県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '9'){
+                                        echo '栃木県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '10'){
+                                        echo '群馬県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '11'){
+                                        echo '埼玉県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '12'){
+                                        echo '千葉県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '13'){
+                                        echo '東京都'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '14'){
+                                        echo '神奈川県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '15'){
+                                        echo '新潟県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '16'){
+                                        echo '富山県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '17'){
+                                        echo '石川県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '18'){
+                                        echo '福井県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '19'){
+                                        echo '山梨県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '20'){
+                                        echo '長野県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '21'){
+                                        echo '岐阜県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '22'){
+                                        echo '静岡県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '23'){
+                                        echo '愛知県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '24'){
+                                        echo '三重県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '25'){
+                                        echo '滋賀県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '26'){
+                                        echo '京都府'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '27'){
+                                        echo '大阪府'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '28'){
+                                        echo '兵庫県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '29'){
+                                        echo '奈良県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '30'){
+                                        echo '和歌山県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '31'){
+                                        echo '鳥取県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '32'){
+                                        echo '島根県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '33'){
+                                        echo '岡山県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '34'){
+                                        echo '広島県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '35'){
+                                        echo '山口県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '36'){
+                                        echo '徳島県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '37'){
+                                        echo '香川県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '38'){
+                                        echo '愛媛県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '39'){
+                                        echo '高知県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '40'){
+                                        echo '福岡県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '41'){
+                                        echo '佐賀県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '42'){
+                                        echo '長崎県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '43'){
+                                        echo '熊本県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '44'){
+                                        echo '大分県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '45'){
+                                        echo '宮城県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '46'){
+                                        echo '鹿児島県'.h($_POST['address']);
+                                    }
+                                    if (h($_POST['pref']) === '47'){
+                                        echo '沖縄県'.h($_POST['address']);
+                                    }
+                                    ?>
                                 </div>
                             </div>
                             </br>
@@ -1569,7 +1724,8 @@ if (!empty($_POST['btn_submit'])) {
                             <input type="hidden" name="year" value="<?php echo h($_POST['year']); ?>">
                             <input type="hidden" name="month" value="<?php echo h($_POST['month']); ?>">
                             <input type="hidden" name="day" value="<?php echo h($_POST['day']); ?>">
-                            <input type="hidden" name="license" value="<?php echo h($_POST['license']); ?>">
+                            <input type="hidden" name="birthday" value="<?php echo h($_POST['birthday']); ?>">
+                            <input type="hidden" name="license" value=" <?php echo h($_POST['license']);?>">
                             <input type="hidden" name="number" value="<?php echo h($_POST['number']); ?>">
                             <input type="hidden" name="email" value="<?php echo h($_POST['email']); ?>">
                             <input type="hidden" name="pref" value="<?php echo h($_POST['pref']); ?>">
@@ -1588,14 +1744,13 @@ if (!empty($_POST['btn_submit'])) {
 <?php if ($pageFlag === 2) : ?>
     <?php if ($_POST['csrf'] === $_SESSION['csrfToken']) : ?>
         <div class="bc-color2">
-            <div class="container pt-5">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="title-f2">
+            <div class="container mx-auto pt-5 pb-5">
+                            <!--DB接続・保存-->
+                            <?php
+                            require 'function/insert.php';
+                            insertContact($_POST);
+                            ?>
                             登録しました。
-                        </div><!--complete-->
-                    </div><!--col-md-6-->
-                </div><!--row-->
             </div><!--container pt-5-->
         </div><!--bc-color2-->
         <?php unset($_SESSION['csrfToken']); ?>
@@ -1613,5 +1768,6 @@ if (!empty($_POST['btn_submit'])) {
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
+</div><!--wrapper-->
 </body>
 </html>
