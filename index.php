@@ -33,6 +33,7 @@ if (!empty($_POST['btn_submit'])) {
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
     <script type="text/javascript" src="js/validation.js"></script>
+    <link rel="icon" type="image/x-icon" href="https://blog.autumnblue.net/wp-content/uploads/2021/01/form.jpg">
 </head>
 <body>
 <div id="wrapper">
