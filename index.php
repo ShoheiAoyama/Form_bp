@@ -32,8 +32,10 @@ if (!empty($_POST['btn_submit'])) {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
-    <script type="text/javascript" src="js/validation.js"></script>
-    <link rel="icon" type="image/x-icon" href="https://blog.autumnblue.net/wp-content/uploads/2021/01/form.jpg">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="js/form.js"></script>
+    <link rel="icon" type="image/x-icon" href="image/form.jpg" alt="アイコン">
 </head>
 <body>
 <div id="wrapper">
@@ -58,11 +60,11 @@ if (!empty($_POST['btn_submit'])) {
     $token = $_SESSION['csrfToken'];
     ?>
 <!--誕生日データ結合-->
-    <script type="text/javascript">
-        function birth(f) {
-            f.elements['birthday'].value = f.elements['year'].value + f.elements['month'].value + f.elements['day'].value;
-        }
-    </script>
+<!--    <script type="text/javascript">-->
+<!--        function birth(f) {-->
+<!--            f.elements['birthday'].value = f.elements['year'].value + f.elements['month'].value + f.elements['day'].value;-->
+<!--        }-->
+<!--    </script>-->
 
     <div id="error"></div>
     <div class="bc-color2">
@@ -71,13 +73,14 @@ if (!empty($_POST['btn_submit'])) {
                 <div class="col-md-6 mx-auto">
                     <form id="form" method="post" action="index.php">
                         <div class="form-group">
-                            <label for="formGroupExampleInput">氏名</label>
+                            <label for="formGroupExampleInput">氏名</label><p id="aoyama"></p>
                             </br>
                             <!--姓-->
-                            <input class="form-control" placeholder="姓" class="form-control" id="name_sei" type="text"
+                            <input class="form-control" placeholder="姓" id="name_sei" type="text"
                                    name="name_sei" value="<?php if (!empty($_POST['name_sei'])) {
                                 echo h($_POST['name_sei']);
                             } ?>">
+                            <div class="feedback"></div>
                             </br>
                             <!--名-->
                             <input class="form-control" placeholder="名" id="name_mei" type="text" name="name_mei"
@@ -90,13 +93,13 @@ if (!empty($_POST['btn_submit'])) {
                             <label for="formGroupExampleInput">性別</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="sex"
+                            <input class="form-check-input" type="radio" name="sex" id="sex"
                                    value="1" <?php if (!empty($_POST['sex']) && $_POST['sex'] === '1') {
                                 echo 'checked';
                             } ?> required><label class="form-check-label" for="exampleRadios1">男性</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="sex"
+                            <input class="form-check-input" type="radio" name="sex" id="sex"
                                    value="2" <?php if (!empty($_POST['sex']) && $_POST['sex'] === '2') {
                                 echo 'checked';
                             } ?>><label class="form-check-label" for="exampleRadios1">女性</label>
@@ -104,10 +107,8 @@ if (!empty($_POST['btn_submit'])) {
                         </br>
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">誕生日</label>
-
                             <div class="form-row">
                                 <div class="col">
-
                                     <select class="form-control" name="year" onchange="birth(this.form)" value="<?php if (!empty($_POST['year'])) {
                                         echo h($_POST['year']);
                                     } ?>" required>
@@ -1117,19 +1118,19 @@ if (!empty($_POST['btn_submit'])) {
                             </div>
                         </div>
                         </br>
-                        <input type="hidden" name="birthday" value="<?php echo h($_POST['birthday']); ?>">
+                        <input type="hidden" name="birthday" id="birthday" value="<?php echo h($_POST['birthday']); ?>">
                         </br>
                         <div class="form-group">
                             <label for="formGroupExampleInput">運転免許証</label>
                         </div>
                         <div class="form-check">
-                            <input type="checkbox" name="license" value="1" <?php if (!empty($_POST['license']) && $_POST['license'] === '1') { echo 'checked="checked"';} ?>>
+                            <input type="checkbox" name="license" value="1" <?php if (!empty($_POST['license']) && $_POST['license'] === ' 1') { echo 'checked';} ?>>
                             <label class="form-check-label" for="defaultCheck1">(持っている方のみチェック)</label>
                         </div>
                         </br>
                         <div class="form-group">
                             <label for="formGroupExampleInput">電話番号</label>
-                            <input class="form-control" placeholder="000-0000-0000" type="text" name="number"
+                            <input class="form-control" placeholder="000-0000-0000" type="text" name="number" id="number"
                                    value="<?php if (!empty($_POST['number'])) {
                                        echo h($_POST['number']);
                                    } ?>" required>
@@ -1137,7 +1138,7 @@ if (!empty($_POST['btn_submit'])) {
                         </br>
                         <div class="form-group">
                             <label for="formGroupExampleInput">メールアドレス</label>
-                            <input class="form-control" placeholder="example@example.com" type="text" name="email"
+                            <input class="form-control" placeholder="example@example.com" type="text" name="email" id="email"
                                    value="<?php if (!empty($_POST['email'])) {
                                        echo h($_POST['email']);
                                    } ?>" required>
@@ -1436,7 +1437,7 @@ if (!empty($_POST['btn_submit'])) {
                         </br>
                         <div class="form-group">
                             <label for="formGroupExampleInput">住所(都道府県以下)</label>
-                            <input class="form-control" placeholder="市町村 番地 建物名" type="text" name="address"
+                            <input class="form-control" placeholder="市町村 番地 建物名" type="text" name="address" id="address"
                                    value="<?php if (!empty($_POST['address'])) {
                                        echo h($_POST['address']);
                                    } ?>" required>
@@ -1452,10 +1453,10 @@ if (!empty($_POST['btn_submit'])) {
                             </textarea>
                         </div>
                         </br>
-                        <button class="btn btn-outline-light mb-5" type="submit" onclick="checkName()"
+                        <button class="btn btn-outline-light mb-5" type="submit" onclick="checkName();"
                                 name="btn_confirm"
-                                value="確認画面へ">確認画面へ
-                        </button>
+                                value="確認画面へ">確認画面へ</button>
+
                         <input type="hidden" name="csrf" value="<?php echo $token; ?>">
                     </form>
                 </div><!--col-md-6-->
@@ -1471,7 +1472,7 @@ if (!empty($_POST['btn_submit'])) {
 <?php //if (empty($_POST['license']) && $_POST['license'] != '1'){
 //            $_POST['license'] = '0';
 //} ?>
-    <?php if (!isset($_POST['license'])){$_POST['license'] = '0';}?>
+    <?php if (array_key_exists('license',$_POST) && !isset($_POST['license']) && $_POST['license'] != '1'){$_POST['license'] = '0';}?>
         <div class="bc-color2">
             <div class="container pt-5">
                 <div class="row">
@@ -1770,5 +1771,6 @@ if (!empty($_POST['btn_submit'])) {
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
 </div><!--wrapper-->
+<script src="js/validation.js"></script>
 </body>
 </html>
