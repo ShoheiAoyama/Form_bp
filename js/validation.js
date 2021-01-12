@@ -5,7 +5,7 @@
 
 var elem = document.getElementById("aoyama");
 console.log(elem)
-elem.innerHTML = "<span style='color: red;'>span要素に変更したよ！</span>";
+elem.innerHTML = "<span style='color: red;'>バリデーションチェック</span>";
 
 
 console.log('8文字以上入力してください')
