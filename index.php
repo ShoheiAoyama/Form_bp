@@ -59,12 +59,6 @@ if (!empty($_POST['btn_submit'])) {
     }
     $token = $_SESSION['csrfToken'];
     ?>
-<!--誕生日データ結合-->
-<!--    <script type="text/javascript">-->
-<!--        function birth(f) {-->
-<!--            f.elements['birthday'].value = f.elements['year'].value + f.elements['month'].value + f.elements['day'].value;-->
-<!--        }-->
-<!--    </script>-->
 
     <div id="error"></div>
     <div class="bc-color2">
@@ -73,7 +67,7 @@ if (!empty($_POST['btn_submit'])) {
                 <div class="col-md-6 mx-auto">
                     <form id="form" method="post" action="index.php">
                         <div class="form-group">
-                            <label for="formGroupExampleInput">氏名</label><p id="aoyama"></p>
+                            <label for="formGroupExampleInput">氏名</label><p id="sei_vali"></p>
                             </br>
                             <!--姓-->
                             <input class="form-control" placeholder="姓" id="name_sei" type="text"
@@ -1130,7 +1124,7 @@ if (!empty($_POST['btn_submit'])) {
                         </br>
                         <div class="form-group">
                             <label for="formGroupExampleInput">電話番号</label>
-                            <input class="form-control" placeholder="000-0000-0000" type="text" name="number" id="number"
+                            <input class="form-control" placeholder="固定電話または携帯電話" type="text" name="number" id="number"
                                    value="<?php if (!empty($_POST['number'])) {
                                        echo h($_POST['number']);
                                    } ?>" required>
