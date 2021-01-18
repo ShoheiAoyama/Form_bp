@@ -1,23 +1,28 @@
 <?php
 require 'function/db.php';
 
-$file_path = "customer.csv"; //ファイル名
-$export_csv_title = ["ID", "姓", "名", "性別"]; //ヘッダー項目
+$file_path = "form_test.csv"; //ファイル名
+$export_csv_title = ["id", "姓", "名", "性別"]; //ヘッダー項目
 $export_sql = "SELECT id, sei, mei, sex FROM form_test"; //SQL文
 
 
 // encoding title into SJIS-win ヘッダーの文字コードをSJIS-winにエンコード
-foreach( $export_csv_title as $key => $val ){
-    $export_header[] = mb_convert_encoding($val, 'SJIS-win', 'UTF-8');
-}
-try {
+//foreach( $export_csv_title as $key => $val ){
+//    $export_header[] = mb_convert_encoding($val, "SJIS-win", "UTF-8");
+//}
 
+// HTTPヘッダを設定
+header('Content-Type: application/octet-stream');
+header('Content-Length: '.filesize($file_path));
+header('Content-Disposition: attachment; filename=form_test.csv');
+
+try {
 //CSV書き込み出力
     if (touch($file_path)) {
         $file = new SplFileObject($file_path, "w");
 
         // 出力するCSVにヘッダーを書き込む
-        $file->fputcsv($export_header);
+        $file->fputcsv($export_csv_title);
 
         // データベース検索
 //    $sql = "SELECT * FROM form_test";
@@ -27,12 +32,12 @@ try {
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $file->fputcsv($row);
         }
-
     }
 }
 catch(RuntimeException $e){
     echo '接続失敗' .$e->getMessage();
 }
+readfile($file_path);
 
     // データベース接続の切断
     $pdo = null;

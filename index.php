@@ -33,8 +33,8 @@ if (!empty($_POST['btn_submit'])) {
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-    <script src="js/form.js"></script>
+    <script src="js/date.js"></script>
+    <script src="js/join.js"></script>
     <link rel="icon" type="image/x-icon" href="image/form.jpg" alt="アイコン">
 </head>
 <body>
@@ -59,28 +59,29 @@ if (!empty($_POST['btn_submit'])) {
     }
     $token = $_SESSION['csrfToken'];
     ?>
-
     <div id="error"></div>
     <div class="bc-color2">
         <div class="container pt-5">
             <div class="row">
                 <div class="col-md-6 mx-auto">
-                    <form id="form" method="post" action="index.php">
+                    <form id="form" class="checkform" name="checkform" method="post" action="index.php">
                         <div class="form-group">
-                            <label for="formGroupExampleInput">氏名</label><p id="sei_vali"></p>
+                            <label for="formGroupExampleInput">氏名</label>
+                            <span class="alertarea"></span>
                             </br>
                             <!--姓-->
-                            <input class="form-control" placeholder="姓" id="name_sei" type="text"
+                            <input class="form-control chars16 namekind" placeholder="姓" id="name_sei" type="text"
                                    name="name_sei" value="<?php if (!empty($_POST['name_sei'])) {
                                 echo h($_POST['name_sei']);
-                            } ?>">
+                            } ?>" required>
                             <div class="feedback"></div>
                             </br>
                             <!--名-->
-                            <input class="form-control" placeholder="名" id="name_mei" type="text" name="name_mei"
+                            <input class="form-control chars16 namekind" placeholder="名" id="name_mei" type="text" name="name_mei"
                                    value="<?php if (!empty($_POST['name_mei'])) {
                                        echo h($_POST['name_mei']);
-                                   } ?>">
+                                   } ?>" required>
+                            <div class="feedback"></div>
                         </div>
                         </br>
                         <div class="form-group">
@@ -103,9 +104,10 @@ if (!empty($_POST['btn_submit'])) {
                             <label for="exampleFormControlSelect1">誕生日</label>
                             <div class="form-row">
                                 <div class="col">
-                                    <select class="form-control" name="year" onchange="birth(this.form)" value="<?php if (!empty($_POST['year'])) {
+                                    <select class="form-control year" id="year" name="year" onchange="birth(this.form);dateValidation(this, 'year', 'month', 'day')" value="<?php if (!empty($_POST['year'])) {
                                         echo h($_POST['year']);
                                     } ?>" required>
+                                        <span class="alertarea2"></span>
                                         <option value="">年</option>
                                         <option value="1900"
                                             <?php if (!empty($_POST['year']) && $_POST['year'] === '1900') {
@@ -842,7 +844,8 @@ if (!empty($_POST['btn_submit'])) {
                                     </select>
                                 </div>
                                 <div class="col">
-                                    <select class="form-control" name="month" onchange="birth(this.form)" required>
+                                    <select class="form-control month" id="month" name="month" onchange="birth(this.form);dateValidation(this, 'year', 'month', 'day')" required>
+                                        <div class="feedback"></div>
                                         <option value="">月</option>
                                         <option value="01"
                                             <?php if (!empty($_POST['month']) && $_POST['month'] === '01') {
@@ -919,7 +922,7 @@ if (!empty($_POST['btn_submit'])) {
                                     </select>
                                 </div>
                                 <div class="col">
-                                    <select class="form-control" onchange="birth(this.form)" name="day" required>
+                                    <select class="form-control day" id="day" onchange="birth(this.form);dateValidation(this, 'year', 'month', 'day')" name="day" required>
                                         <option value="">日</option>
                                         <option value="01"
                                             <?php if (!empty($_POST['day']) && $_POST['day'] === '01') {
@@ -1124,18 +1127,20 @@ if (!empty($_POST['btn_submit'])) {
                         </br>
                         <div class="form-group">
                             <label for="formGroupExampleInput">電話番号</label>
-                            <input class="form-control" placeholder="固定電話または携帯電話" type="text" name="number" id="number"
+                            <input class="form-control number number0" placeholder="固定電話または携帯電話" type="text" name="number" id="number"
                                    value="<?php if (!empty($_POST['number'])) {
                                        echo h($_POST['number']);
                                    } ?>" required>
+                            <span class="alertarea"></span>
                         </div>
                         </br>
                         <div class="form-group">
                             <label for="formGroupExampleInput">メールアドレス</label>
-                            <input class="form-control" placeholder="example@example.com" type="text" name="email" id="email"
+                            <input class="form-control alpha chars225" placeholder="example@example.com" type="text" name="email" id="email"
                                    value="<?php if (!empty($_POST['email'])) {
                                        echo h($_POST['email']);
                                    } ?>" required>
+                            <span class="alertarea"></span>
                         </div>
                         </br>
                         <div class="form-group">
@@ -1431,26 +1436,28 @@ if (!empty($_POST['btn_submit'])) {
                         </br>
                         <div class="form-group">
                             <label for="formGroupExampleInput">住所(都道府県以下)</label>
-                            <input class="form-control" placeholder="市町村 番地 建物名" type="text" name="address" id="address"
+                            <input class="form-control chars225" placeholder="市町村 番地 建物名" type="text" name="address" id="address"
                                    value="<?php if (!empty($_POST['address'])) {
                                        echo h($_POST['address']);
                                    } ?>" required>
+                            <span class="alertarea"></span>
                         </div>
                         </br>
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">メッセージ</label>
                             </br>
-                            <textarea class="form-control" id="msg" name="msg" rows="3" required>
-                            <?php if (!empty($_POST['msg'])) {
+                            <textarea class="form-control chars1000" id="msg" name="msg" rows="3" required>
+                            <?php if (!empty($_POST['msg'])){
                                 echo h($_POST['msg']);
                             } ?>
                             </textarea>
+                            <span class="alertarea"></span>
                         </div>
                         </br>
                         <button class="btn btn-outline-light mb-5" type="submit" onclick="checkName();"
                                 name="btn_confirm"
-                                value="確認画面へ">確認画面へ</button>
-
+                                value="確認画面へ">確認画面へ
+<!--                        </button>-->
                         <input type="hidden" name="csrf" value="<?php echo $token; ?>">
                     </form>
                 </div><!--col-md-6-->
@@ -1463,10 +1470,11 @@ if (!empty($_POST['btn_submit'])) {
 <?php if ($pageFlag === 1) : ?>
     <!--csrf-->
     <?php if ($_POST['csrf'] === $_SESSION['csrfToken']) : ?>
-<?php //if (empty($_POST['license']) && $_POST['license'] != '1'){
-//            $_POST['license'] = '0';
-//} ?>
-    <?php if (array_key_exists('license',$_POST) && !isset($_POST['license']) && $_POST['license'] != '1'){$_POST['license'] = '0';}?>
+    <?php
+            if (!array_key_exists('license',$_POST)){
+            $_POST['license'] = '0';
+        }
+        ?>
         <div class="bc-color2">
             <div class="container pt-5">
                 <div class="row">
@@ -1545,7 +1553,7 @@ if (!empty($_POST['btn_submit'])) {
                             </div>
                             </br>
                             <div class="form-group">
-                                <label class="title-f1" for="formGroupExampleInput">メールアドレス</label>
+                                <label class="title-f1 chars225" for="formGroupExampleInput">メールアドレス</label>
                                 </br>
                                 <div class="title2-f1">
                                     <?php echo h($_POST['email']); ?>

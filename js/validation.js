@@ -1,73 +1,168 @@
-//バリデーション(Label横コメント)
+// バリデーション
+// 名前16文字の入力チェック
+document.addEventListener('DOMContentLoaded', function () {
 
-// var elem = document.getElementById("sei_vali");
-// console.log(elem)
-// elem.innerHTML = "<span style='color: red;'>バリデーションチェック</span>";
-
-//バリデーション
-//修正中 ×送信ボタン時→○入力リアルタイム時
-function checkName(){
-    const sei = document.getElementById('name_sei').value;
-    const mei = document.getElementById('name_mei').value;
-    // const birthday = document.getElementById('birthday').value;
-    // const license = document.getElementById('license').value;
-    // const number = document.getElementById('number').value;
-    const eadr = document.getElementById('email').value;
-    const adr = document.getElementById('address').value;
-    const mes = document.getElementById('msg').value;
-
-
-    //名前(姓)上限16文字
-    if(sei.length > 16){
-        window.alert('16文字以下で入力してください');
-
+    var targets = document.getElementsByClassName('chars16');
+    for (var i = 0; i < targets.length; i++) {
+        targets[i].oninput = function () {
+            var alertelement = this.parentNode.getElementsByClassName('alertarea');
+            if (this.value.trim().length > 17) {
+                if (alertelement[0]) {
+                    alertelement[0].innerHTML = "16文字以下で入力してください";
+                }
+                this.style.border = "2px solid red";
+            } else {
+                if (alertelement[0]) {
+                    alertelement[0].innerHTML = "";
+                }
+                this.style.border = "1px solid black";
+            }
+        }
     }
-    //名前(名)上限16文字
-    if(mei.length > 16){
-        window.alert('16文字以下で入力してください');
-    }
-    //電話番号
-    // var num = document.getElementById('number').value.replace(/[━.*‐.*―.*－.*\-.*ー.*\-]/gi,'');
-    // if (!num.match(/^(0[5-9]0[0-9]{8}|0[1-9][1-9][0-9]{7})$/)) {
-	// error.innerText = 'エラーメッセージ';
-    // }
+});
 
-    //メールアドレス上限255文字
-    if(eadr.length > 255){
-        // console.info('8文字以上入力してください');
-        window.alert('255文字以下で入力してください');
-    }
-    //住所上限255文字
-    if(adr.length > 255){
-        // console.info('8文字以上入力してください');
-        window.alert('255文字以下で入力してください');
-    }
-    //メッセージ上限1000文字
-    if(mes.length > 1000){
-        // console.info('8文字以上入力してください');
-        window.alert('1000文字以下で入力してください');
-    }
+// 電話番号数字入力チェック
+document.addEventListener('DOMContentLoaded', function () {
 
-}
+    var targets = document.getElementsByClassName('number');
+    for (var i = 0; i < targets.length; i++) {
+        targets[i].oninput = function () {
+            var alertelement = this.parentNode.getElementsByClassName('alertarea');
+            if ((this.value != '') && (this.value.match(/[^\d]+/))) {
+                if (alertelement[0]) {
+                    alertelement[0].innerHTML = '電話番号はハイフンなし数字のみでご入力ください';
+                }
+                this.style.border = "2px solid red";
+            } else {
+                if (alertelement[0]) {
+                    alertelement[0].innerHTML = "";
+                }
+                this.style.border = "1px solid black";
+            }
+        }
+    }
+});
 
-//Enterキーバリデーション
-// document.getElementById("form").onkeypress = (e) => {
-//     // form1に入力されたキーを取得
-//     const key = e.keyCode || e.charCode || 0;
-//     // 13はEnterキーのキーコード
-//     if (key == 13) {
-//         // アクションを行わない
-//         e.preventDefault();
-//     }
-// }
-//
-// $(function(){
-//     $("input").on("keydown", function(e) {
-//         if ((e.which && e.which === 13) || (e.keyCode && e.keyCode === 13)) {
-//             return false;
-//         } else {
-//             return true;
-//         }
-//     });
-// });
+// 電話番号数字入力チェック
+document.addEventListener('DOMContentLoaded', function () {
+
+    var targets = document.getElementsByClassName('number0');
+    for (var i = 0; i < targets.length; i++) {
+        targets[i].oninput = function () {
+            var alertelement = this.parentNode.getElementsByClassName('alertarea');
+            if ((this.value != '') && (this.value.match(/^[^0]/))) {
+                if (alertelement[0]) {
+                    alertelement[0].innerHTML = '固定電話か携帯電話の番号を入力してください';
+                }
+                this.style.border = "2px solid red";
+            } else {
+                if (alertelement[0]) {
+                    alertelement[0].innerHTML = "";
+                }
+                this.style.border = "1px solid black";
+            }
+        }
+    }
+});
+
+// メールアドレス 英字と特定の記号の入力チェック
+document.addEventListener('DOMContentLoaded', function () {
+
+    var targets = document.getElementsByClassName('alpha');
+    for (var i = 0; i < targets.length; i++) {
+        targets[i].oninput = function () {
+            var alertelement = this.parentNode.getElementsByClassName('alertarea');
+            if ((this.value != '') && (this.value.match(/[^a-zA-Z0-9_@.\-]/))) {
+                if (alertelement[0]) {
+                    alertelement[0].innerHTML = '入力には、英字と記号「._@-」だけが使えます。';
+                }
+                this.style.border = "2px solid red";
+            } else {
+                if (alertelement[0]) {
+                    alertelement[0].innerHTML = "";
+                }
+                this.style.border = "1px solid black";
+            }
+        }
+    }
+});
+
+// メールアドレス,住所 225文字の入力チェック
+document.addEventListener('DOMContentLoaded', function () {
+
+    var targets = document.getElementsByClassName('chars225');
+    for (var i = 0; i < targets.length; i++) {
+        targets[i].oninput = function () {
+            var alertelement = this.parentNode.getElementsByClassName('alertarea');
+            if (this.value.trim().length > 226) {
+                if (alertelement[0]) {
+                    alertelement[0].innerHTML = "255文字以下で入力してください";
+                }
+                this.style.border = "2px solid red";
+            } else {
+                if (alertelement[0]) {
+                    alertelement[0].innerHTML = "";
+                }
+                this.style.border = "1px solid black";
+            }
+        }
+    }
+});
+
+// メッセージ上限1000文字
+document.addEventListener('DOMContentLoaded', function () {
+
+    var targets = document.getElementsByClassName('chars1000');
+    for (var i = 0; i < targets.length; i++) {
+        targets[i].oninput = function () {
+            var alertelement = this.parentNode.getElementsByClassName('alertarea');
+            if (this.value.trim().length > 1001) {
+                if (alertelement[0]) {
+                    alertelement[0].innerHTML = "1000文字以下で入力してください";
+                }
+                this.style.border = "2px solid red";
+            } else {
+                if (alertelement[0]) {
+                    alertelement[0].innerHTML = "";
+                }
+                this.style.border = "1px solid black";
+            }
+        }
+    }
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    // 送信時のチェック（※規則に沿わない入力があれば送信しない）
+    var targets = document.getElementsByClassName('checkform');
+    for (var i = 0; i < targets.length; i++) {
+        // 送信直前で全項目を再度チェックしてエラーを数える
+        targets[i].onsubmit = function () {
+            // フォームの中にあるinput要素とtextarea要素をすべて得る
+            var inputelements = this.querySelectorAll('input,textarea');
+            var alerts = this.getElementsByClassName('alertarea');
+            var ret = 0;
+
+            for (var j = 0; j < alerts.length; j++) {
+                if (inputelements[j].oninput) {
+                    inputelements[j].oninput();
+                }
+            }
+            // エラーメッセージがなければ送信を許可
+            for (var j = 0; j < alerts.length; j++) {
+                if (alerts[j].innerHTML.length > 0) {
+                    ret++;
+                }
+            }
+            if (ret == 0) {
+                return true;
+            } else {
+                alert(ret + "個のエラーがあります。");
+                return false;
+            }
+
+        }
+    }
+});
 
