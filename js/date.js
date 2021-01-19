@@ -14,3 +14,11 @@ function dateValidation( element, year, month, day ) {
         }
     }
 }
+
+//Enterキー無効
+// function getValue() {
+//     return document.getElementById("button1").value = '確認';
+// }
+// function enter() {
+//     document.checkform.submit();
+// }

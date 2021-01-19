@@ -6,9 +6,9 @@ $export_csv_title = ["id", "姓", "名", "性別"]; //ヘッダー項目
 $export_sql = "SELECT id, sei, mei, sex FROM form_test"; //SQL文
 
 
-// encoding title into SJIS-win ヘッダーの文字コードをSJIS-winにエンコード
+//ヘッダーの文字コードをSJISにエンコード
 //foreach( $export_csv_title as $key => $val ){
-//    $export_header[] = mb_convert_encoding($val, "SJIS-win", "UTF-8");
+//    $export_header[] = mb_convert_encoding($val, "SJIS");
 //}
 
 // HTTPヘッダを設定
